@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redux Example</title>
+  </head>
+  <body>
+    <div>
+      Number: <span id="number"></span>
+      <button id="add">ADD</button>
+      <button id="subtract">SUBTRACT</button>
+    </div>
+    <script>
+      const createStore = (reducer, initialState) => {
+        const store = {
+          state: initialState,
+          listeners: [],
+          getState: () => store.state,
+          subscribe: (listener) => {
+            store.listeners.push(listener);
+          },
+          dispatch: (action) => {
+            store.state = reducer(store.state, action);
+            store.listeners.forEach((listener) => listener());
+          },
+        };
+
+        return store;
+      };
+
+      const reducer = (previousState, action) => {
+        switch (action?.type) {
+          case "ADD":
+            return {
+              number: previousState.number + action.payload.number,
+            };
+          case "SUBTRACT":
+            return {
+              number: previousState.number - action.payload.number,
+            };
+          default:
+            return previousState;
+        }
+      };
+
+      const initialState = {
+        number: 1337,
+      };
+      const store = createStore(reducer, initialState);
+
+      const numberNode = document.getElementById("number");
+      store.subscribe(() => {
+        const state = store.getState();
+        const number = state.number;
+        numberNode.innerHTML = number;
+      });
+
+      document.getElementById("add").addEventListener("click", () => {
+        store.dispatch({
+          type: "ADD",
+          payload: {
+            number: 1,
+          },
+        });
+      });
+
+      document.getElementById("subtract").addEventListener("click", () => {
+        store.dispatch({
+          type: "SUBTRACT",
+          payload: {
+            number: 1,
+          },
+        });
+      });
+
+      store.dispatch();
+    </script>
+  </body>
+</html>
