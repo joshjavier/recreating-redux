@@ -1,0 +1,25 @@
+{
+  "name": "recreating-redux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "actions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshjavier/recreating-redux.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/joshjavier/recreating-redux/issues"
+  },
+  "homepage": "https://github.com/joshjavier/recreating-redux#readme",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.8",
+    "typescript": "^5.7.3"
+  }
+}
